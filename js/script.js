@@ -45,6 +45,12 @@ UI.prototype.clearFields = function () {
     document.getElementById("author").value = "";
     document.getElementById("isbn").value = "";
 };
+// deletebook
+UI.prototype.deleteBook = function (target) {
+ if (target.className === "delete") {
+     target.parentElement.parentElement.remove();
+ }
+};
 
 //event listeners
 document.getElementById("book-form").addEventListener("submit", (e) => {
@@ -59,14 +65,23 @@ document.getElementById("book-form").addEventListener("submit", (e) => {
     //validator
     if(title === "" || author === "" || isbn === "") {
         ui.showAlert("Please fill in all fields!", "error");
-    } else {
+        ui.clearFields();
+    } else if (isNaN(isbn) || isbn.length !== 13) {
+        ui.showAlert("Please enter a numbers!", "error");
+    } else { 
         ui.addBookToList(book);
         ui.showAlert("Book added!", "success");
         ui.clearFields();
     };
 
-    ui.addBookToList(book);
-    ui.clearFields();
-
     e.preventDefault();
 });
+ // event listener for DBook
+ document.getElementById("book-list").addEventListener("click", (e) => {
+     const ui = new UI();
+     ui.deleteBook(e.target);
+     ui.showAlert("Book Deleted", "success");
+
+
+     e.preventDefault();
+ } );
