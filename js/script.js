@@ -58,10 +58,10 @@ document.getElementById("book-form").addEventListener("submit", (e) => {
 
     //validator
     if(title === "" || author === "" || isbn === "") {
-        ui.showAlert("Please fill in all fields!", "erroe");
+        ui.showAlert("Please fill in all fields!", "error");
     } else {
         ui.addBookToList(book);
-        ui.showAlert("Book added!", "seccess");
+        ui.showAlert("Book added!", "success");
         ui.clearFields();
     };
 
